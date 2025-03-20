@@ -33,6 +33,9 @@ public class BookService implements IBookService {
     @Override
     public BookDto updateBook(BookDto book, Long id) {
         return bookRepository.findById(id).map(b -> {
+            if (!b.getISBN().equals(book.getISBN()) && bookAlreadyStored(book.getISBN())) {
+                throw new EntityAlreadyExistsException("ISBN is already in use by another book!");
+            }
             b.setTitle(book.getTitle());
             b.setAuthor(book.getAuthor());
             b.setGenre(book.getGenre());

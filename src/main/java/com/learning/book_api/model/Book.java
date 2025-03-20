@@ -1,14 +1,10 @@
 package com.learning.book_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Getter
@@ -24,7 +20,7 @@ public class Book {
     private String author;
     private String genre;
     private Double price;
-    @NaturalId(mutable = false)
+    @Column(unique = true, nullable = false)
     private String ISBN;
 
 }
