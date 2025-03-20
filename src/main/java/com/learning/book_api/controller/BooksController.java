@@ -2,6 +2,7 @@ package com.learning.book_api.controller;
 
 
 import com.learning.book_api.model.Book;
+import com.learning.book_api.model.dto.BookDto;
 import com.learning.book_api.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,20 +19,20 @@ public class BooksController {
     private final BookService bookService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Book>> getBooks() {
-        List<Book> books = bookService.getAllBooks();
+    public ResponseEntity<List<BookDto>> getBooks() {
+        List<BookDto> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book createdBook = bookService.addBook(book);
+    public ResponseEntity<BookDto> addBook(@RequestBody BookDto book) {
+        BookDto createdBook = bookService.addBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Book> updateBook(@RequestBody Book book, @PathVariable Long id) {
-        Book updatedBook = bookService.updateBook(book, id);
+    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto book, @PathVariable Long id) {
+        BookDto updatedBook = bookService.updateBook(book, id);
         return ResponseEntity.ok(updatedBook);
     }
 
@@ -42,8 +43,8 @@ public class BooksController {
     }
 
     @GetMapping("/book/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
-        Book book = bookService.getBookById(id);
+    public ResponseEntity<BookDto> getBookById(@PathVariable Long id) {
+        BookDto book = bookService.getBookById(id);
         return ResponseEntity.ok(book);
     }
 

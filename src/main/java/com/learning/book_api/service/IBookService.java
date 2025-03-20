@@ -4,18 +4,19 @@ package com.learning.book_api.service;
 
 
 import com.learning.book_api.model.Book;
+import com.learning.book_api.model.dto.BookDto;
 
 import java.util.List;
 
 public interface IBookService {
 
-    public Book addBook(Book book);
+    public BookDto addBook(BookDto book);
 
-    public Book updateBook(Book book, Long id);
+    public BookDto updateBook(BookDto book, Long id);
 
-    public Book getBookById(Long id);
+    public BookDto getBookById(Long id);
 
-    public List<Book> getAllBooks();
+    public List<BookDto> getAllBooks();
 
     public void deleteBook(Long id);
 
