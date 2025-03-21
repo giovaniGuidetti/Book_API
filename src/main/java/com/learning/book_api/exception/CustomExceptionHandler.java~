@@ -35,7 +35,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessageBody> handleGenericException(Exception ex) {
-        ErrorMessageBody errorBody = new ErrorMessageBody(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred: " + ex.getMessage());
+        ErrorMessageBody errorBody = new ErrorMessageBody(HttpStatus.INTERNAL_SERVER_ERROR, "\n" + "An unexpected error occurred: " + ex.getMessage());
         return new ResponseEntity<>(errorBody, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
