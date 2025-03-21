@@ -14,15 +14,15 @@ import lombok.Setter;
 public class BookDto {
 
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "Title must not be empty")
     private String title;
-    @NotEmpty
+    @NotEmpty(message = "Author must not be empty")
     private String author;
-    @NotEmpty
+    @NotEmpty(message = "Genre must not be empty")
     private String genre;
-    @NotNull
+    @NotNull(message = "Price must not be null")
     private Double price;
-    @NotEmpty
+    @NotEmpty(message = "ISBN must not be empty")
     private String ISBN;
 
 }
