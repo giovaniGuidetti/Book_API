@@ -4,6 +4,7 @@ package com.learning.book_api.controller;
 import com.learning.book_api.model.Book;
 import com.learning.book_api.model.dto.BookDto;
 import com.learning.book_api.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,13 @@ public class BooksController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<BookDto> addBook(@RequestBody BookDto book) {
+    public ResponseEntity<BookDto> addBook(@RequestBody @Valid BookDto book) {
         BookDto createdBook = bookService.addBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto book, @PathVariable Long id) {
+    public ResponseEntity<BookDto> updateBook(@RequestBody @Valid BookDto book, @PathVariable Long id) {
         BookDto updatedBook = bookService.updateBook(book, id);
         return ResponseEntity.ok(updatedBook);
     }

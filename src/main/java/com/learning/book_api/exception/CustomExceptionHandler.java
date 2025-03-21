@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -13,11 +14,10 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessageBody> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        String errorMessage = ex.getBindingResult().getFieldErrors()
-                .stream()
+        List<String> errorMessages = ex.getBindingResult().getFieldErrors().stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .collect(Collectors.joining(", "));
-        ErrorMessageBody errorBody = new ErrorMessageBody(HttpStatus.BAD_REQUEST, errorMessage);
+                .toList();
+        ErrorMessageBody errorBody = new ErrorMessageBody(HttpStatus.BAD_REQUEST, String.join(", ", errorMessages));
         return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
     }
 
