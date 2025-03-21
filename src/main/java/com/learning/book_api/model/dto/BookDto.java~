@@ -1,5 +1,0 @@
-package com.learning.book_api.model.dto;
-
-public class BookDto {
-    
-}
