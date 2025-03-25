@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessageBody> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        // Aqui estamos pegando somente fieldErrors, podem haver outros tipos (classe superior a essa sendo ObjectError) mas n nesse caso
+        // portanto não se faz necessário uma conversão para este tipo de erro
+        // assim podemos só separar a lista deles que viem em uma stream mapear como quiser e então transformar para uma lista.
         List<String> errorMessages = ex.getBindingResult().getFieldErrors().stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .toList();
